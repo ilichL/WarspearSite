@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarspesrSite.Data.Entity
 {
-    public class Role
+    public class Role : BaseEntity
     {
         public string Name { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }

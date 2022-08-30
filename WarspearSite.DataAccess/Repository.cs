@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using WarspearSite.Core.Interfaces.Data;
 using WarspesrSite.Data;
 using WarspesrSite.Data.Entity;
@@ -36,13 +39,41 @@ namespace WarspearSite.DataAccess
             _entities.Remove(entity);
         }
 
-        public async Task FindById(Guid id)
+        public async Task<T> GetById(Guid id)
         {
-            await _entities.FirstOrDefaultAsync( entity
+             return await _entities.FirstOrDefaultAsync( entity
                 => entity.Id == id);
         }
 
-        public async 
+        public virtual IQueryable<T> Get()
+        {
+            return _entities;
+        }
+
+        public async Task<T> GetByIdWithIncludes(Guid Id,
+            params Expression<Func<T, object>>[] includes)
+        {
+            if (includes.Any())
+            {
+                return await includes.Aggregate(_entities.Where(entity => entity.Id.Equals(Id)),
+                    (current, include) => current.Include(include)).FirstOrDefaultAsync();
+            }
+            return await GetById(Id);
+        }
+
+        public virtual async Task<IQueryable<T>> FindBy(Expression<Func<T, bool>> predicate,
+           params Expression<Func<T, object>>[] includes)
+        {
+            var result = _entities.Where(predicate);
+
+            if (includes.Any())
+            {
+                result = includes.Aggregate(result, (current, include) => current.Include(include));
+            }
+            return result;
+        }
+
+
 
     }
 }
