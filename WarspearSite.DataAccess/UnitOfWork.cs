@@ -19,6 +19,7 @@ namespace WarspearSite.DataAccess
         private readonly IRepository<Source> sourceRepository;
         private readonly IRepository<User> userRepository;
         private readonly IRepository<UserRole> userRoleRepository;
+        private readonly IRepository<State> stateRepository;
 
         public UnitOfWork(IRepository<Article> articleRepository,
             IRepository<Comment> commentRepository,
@@ -28,6 +29,7 @@ namespace WarspearSite.DataAccess
             IRepository<Source> sourceRepository,
             IRepository<User> userRepository,
             IRepository<UserRole> userRoleRepository,
+            IRepository<State> stateRepository,
             Context context)
         {
             this.articleRepository = articleRepository;
@@ -38,6 +40,7 @@ namespace WarspearSite.DataAccess
             this.sourceRepository = sourceRepository;
             this.userRepository = userRepository;
             this.userRoleRepository = userRoleRepository;
+            this.stateRepository = stateRepository;
             this.context = context;
         }
 
@@ -49,6 +52,7 @@ namespace WarspearSite.DataAccess
         public IRepository<Source> Sources => sourceRepository;
         public IRepository<User> Users => userRepository;
         public IRepository<UserRole> UserRoles => userRoleRepository;
+        public IRepository<State> States => stateRepository;
 
         public async Task<int> CommitChanges()
         {

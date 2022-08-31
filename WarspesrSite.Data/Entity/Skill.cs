@@ -10,7 +10,7 @@ namespace WarspesrSite.Data.Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int  SkillPoint { get; set; }
+        public int? SkillPoint { get; set; }
         public Guid HeroId { get; set; }
         public virtual Hero Hero { get; set; }
     }

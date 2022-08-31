@@ -72,8 +72,5 @@ namespace WarspearSite.DataAccess
             }
             return result;
         }
-
-
-
     }
 }

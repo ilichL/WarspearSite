@@ -17,6 +17,7 @@ namespace WarspearSite.Core.Interfaces.Data
         IRepository<Source> Sources { get; }
         IRepository<User> Users { get; }
         IRepository<UserRole> UserRoles { get; }
+        IRepository<State> States { get; }
         Task<int> CommitChanges();
     }
 }

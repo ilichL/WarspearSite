@@ -18,6 +18,7 @@ namespace WarspesrSite.Data
         DbSet<Source> sources { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<UserRole> UserRoles { get; set; }
+        DbSet<State> States { get; set; }
 
 
         public Context (DbContextOptions<Context> options)
