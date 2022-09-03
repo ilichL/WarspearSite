@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WarspearSite\WarspearSite.csproj" />
     <ProjectReference Include="..\WarspesrSite.Data\WarspesrSite.Data.csproj" />
   </ItemGroup>
 
