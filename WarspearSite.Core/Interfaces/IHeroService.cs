@@ -11,5 +11,6 @@ namespace WarspearSite.Core.Interfaces
     {
         Task CreateHero(HeroCreateModel model);
         Task<HeroCreateModel> GetHeroesByIdAsync(Guid id);
+        Task<HeroModel> GetHeroByNameWithSkillsAndStates(String name);
     }
 }

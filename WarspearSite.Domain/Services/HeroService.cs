@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,15 @@ namespace WarspearSite.Domain.Services
         public async Task<HeroCreateModel> GetHeroesByIdAsync(Guid id)
         {
             return mapper.Map<HeroCreateModel>(await unitOfWork.Heroes.GetById(id));
+        }
+
+        public async Task<HeroModel> GetHeroByNameWithSkillsAndStates(String name)
+        {
+            var heroId = (await unitOfWork.Heroes.FindBy(hero => 
+                hero.Name.Equals(name))).FirstOrDefaultAsync().Result.Id;
+
+            return mapper.Map<HeroModel>(await unitOfWork.Heroes.GetByIdWithIncludes(heroId,hero => hero.States,
+                hero => hero.States));
         }
 
     }
