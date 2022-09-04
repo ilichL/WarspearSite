@@ -1,8 +1,7 @@
 ﻿namespace WarspearSite.Models
 {
-    public class HeroCreateModel
+    public class HeroModel
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public decimal Bonus { get; set; }

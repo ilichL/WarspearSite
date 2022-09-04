@@ -14,5 +14,6 @@ namespace WarspearSite.Core.Interfaces
         Task CreateSkill(SkillCreateModel model);
         Task<SkillModel> GetSkillBySkillNameAsync(String name);
         Task<SkillCreateModel> GetSkillByIdAsync(Guid id);
+        Task SaveSkillsAsync(List<SkillCreateModel> skills);
     }
 }

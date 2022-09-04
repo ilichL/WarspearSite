@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +40,12 @@ namespace WarspearSite.Domain.Services
         public async Task<SkillCreateModel> GetSkillByIdAsync(Guid id)
         {
             return mapper.Map<SkillCreateModel>(await unitOfWork.Skills.GetById(id));
+        }
+
+        public async Task SaveSkillsAsync(List<SkillCreateModel> skills)
+        {///////////
+            await unitOfWork.Skills.AddAsync(mapper.Map<Skill>(skills));
+            await unitOfWork.CommitChanges();
         }
 
     }
