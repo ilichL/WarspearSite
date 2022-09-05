@@ -1,8 +1,9 @@
 ﻿namespace WarspearSite.Models
 {
-    public class StateModel
+    public class StateCreateModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
+        public Guid HeroId { get; set; }
         public int Health { get; set; }
         public int HealthRegeneration { get; set; }
         public int Energy { get; set; }
