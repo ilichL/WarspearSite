@@ -33,11 +33,34 @@ namespace WarspearSite.Domain.Services
             var hero = await unitOfWork.Heroes.GetById(model.HeroId);
             switch(hero.Fraction)
             {
-                case "Chosen": { model.Energy += 10; break; }//мак количество энергии 10пр
-                case "Fistborn"://физ маг урон 4пр
-                case "Mountain Clans"://здоровье 4пр
-                case "Forsaken"://реген эн 3
+                case "Chosen": 
+                    {
+                        model.Energy += 10; 
+                        break; 
+                    }
+
+                case "Fistborn": 
+                    { 
+                        model.PhisicalDamage *= (int)0.04 + model.PhisicalDamage;
+                        model.MagicalDamage *= (int)0.04 + model.PhisicalDamage;
+                        break;
+                    }//added to all damage
+
+                case "Mountain Clans": 
+                    { 
+                        model.Health *= (int)0.04 + model.Health; 
+                        break; 
+                    }// added without armor
+
+                case "Forsaken": 
+                    { 
+                        model.EnergyRegeneration += 3; 
+                        break; 
+                    }
+                default: // exeption
+                    break;
             }
+            return model;
         }
     }
 }

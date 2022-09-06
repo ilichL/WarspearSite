@@ -10,6 +10,8 @@
         public int EnergyRegeneration { get; set; }
         public int PhysicalDefense { get; set; }
         public int MagicalDefence { get; set; }
+        public int PhisicalDamage { get; set; }
+        public int MagicalDamage { get; set; }
         public decimal CritHit { get; set; }
         public decimal Accyarcy { get; set; }// точность
         public decimal? AttackSpeed { get; set; }
