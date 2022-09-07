@@ -62,5 +62,10 @@ namespace WarspearSite.Domain.Services
             }
             return model;
         }
+
+        public async Task<StateCreateModel> CalculatingHelth(StateCreateModel model)
+        {
+         //parse health from file?   
+        }
     }
 }
