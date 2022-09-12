@@ -13,6 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarspearSite.Core", "Warspe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarspearSite.Domain", "WarspearSite.Domain\WarspearSite.Domain.csproj", "{350E8143-176A-45BD-BCAA-7F5FA4BD86C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{95EA3416-DD3D-491D-8B45-36FD8973DBB2}"
+	ProjectSection(SolutionItems) = preProject
+		health.json = health.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
