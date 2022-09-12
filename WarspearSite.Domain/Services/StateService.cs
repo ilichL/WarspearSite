@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 using WarspearSite.Core.Interfaces.Data;
 using WarspearSite.Models;
 using WarspesrSite.Data.Entity;
+using Newtonsoft.Json.Linq;
 
 namespace WarspearSite.Domain.Services
 {
@@ -65,7 +68,18 @@ namespace WarspearSite.Domain.Services
 
         public async Task<StateCreateModel> CalculatingHelth(StateCreateModel model)
         {
-         //parse health from file?   
+            var hero = await unitOfWork.Heroes.GetById(model.HeroId);
+            string path = "";
+            string json = File.ReadAllText(path);
+            List<HealthModel> models = JsonConvert.DeserializeObject<List<HealthModel>>("health.json");//json
+
+            foreach(var mod in models)
+            {
+                if(mod.ClassName.Equals(hero.Class));
+                    model.Health = mod.Health[hero.Level - 1];
+            }
+
+            return model;
         }
     }
 }

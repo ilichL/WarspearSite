@@ -2,7 +2,7 @@
 {
     public class HeroCreateModel
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public decimal Bonus { get; set; }
