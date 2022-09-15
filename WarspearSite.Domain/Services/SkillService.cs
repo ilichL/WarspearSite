@@ -25,10 +25,21 @@ namespace WarspearSite.Domain.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task CreateSkill(SkillCreateModel model)
-        { 
-            unitOfWork.Skills.AddAsync(mapper.Map<Skill>(model));
-            await unitOfWork.CommitChanges();
+        public async Task<bool> CreateSkill(SkillCreateModel model)
+        {
+            try
+            {
+                unitOfWork.Skills.AddAsync(mapper.Map<Skill>(model));
+                await unitOfWork.CommitChanges();
+
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+
         }
 
         public async Task<SkillModel> GetSkillBySkillNameAsync(String name)
@@ -42,10 +53,20 @@ namespace WarspearSite.Domain.Services
             return mapper.Map<SkillCreateModel>(await unitOfWork.Skills.GetById(id));
         }
 
-        public async Task SaveSkillsAsync(List<SkillCreateModel> skills)
+        public async Task<bool> SaveSkillsAsync(List<SkillCreateModel> skills)
         {///////////
-            await unitOfWork.Skills.AddAsync(mapper.Map<Skill>(skills));
-            await unitOfWork.CommitChanges();
+            try
+            {
+                await unitOfWork.Skills.AddAsync(mapper.Map<Skill>(skills));
+                await unitOfWork.CommitChanges();
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+
         }
 
     }

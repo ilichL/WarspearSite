@@ -14,7 +14,7 @@ using WarspearSite.Core.Interfaces;
 
 namespace WarspearSite.Domain.Services
 {
-    public class StateService
+    public class StateService : IStateService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -34,7 +34,7 @@ namespace WarspearSite.Domain.Services
             await unitOfWork.CommitChanges();        
         }
 
-        public async Task<StateCreateModel> CalculateBasicStates(StateCreateModel model)
+        public async Task<StateCreateModel> CalculateBasicStatesAsync(StateCreateModel model)
         {
             var hero = await unitOfWork.Heroes.GetById(model.HeroId);
             switch(hero.Fraction)
@@ -69,7 +69,7 @@ namespace WarspearSite.Domain.Services
             return model;
         }
 
-        public async Task<int> CalculatingHelth(Guid HeroId)
+        public async Task<int> CalculatingHelthAsync(Guid HeroId)
         {//add defence
             var hero = await unitOfWork.Heroes.GetById(HeroId);
             string path = "";
@@ -87,7 +87,7 @@ namespace WarspearSite.Domain.Services
             return modelHealth;
         }
 
-        public async Task<bool> ChangeState(StateModel model)
+        public async Task<bool> ChangeStateAsync(StateModel model)
         {
             try
             {
@@ -101,11 +101,12 @@ namespace WarspearSite.Domain.Services
             }
         }
 
-        public async Task CraeteBaseStates(HeroCreateModel heroModel)
+        public async Task<StateModel> CraeteBaseStatesAsync(HeroCreateModel heroModel)
         {//Create base state of Hero.
             State state = new State()
             {
-                Health = await CalculatingHelth(heroModel.Id),
+                Id = Guid.NewGuid(),
+                Health = await CalculatingHelthAsync(heroModel.Id),
                 HealthRegeneration = 19,
                 Energy = 100,
                 EnergyRegeneration = 5,
@@ -132,7 +133,41 @@ namespace WarspearSite.Domain.Services
                 DamageReflection = 0,
                 Solidity = 0.1m,
                 Resistance = 0
-    };
+            };
+
+            return mapper.Map<StateModel>(state);
+        }
+
+        public async Task<bool> RemoveStatesByIdAsync(Guid id)
+        {
+            try
+            {
+                var state = await unitOfWork.States.GetById(id);
+                await unitOfWork.States.Remove(state);
+                await unitOfWork.CommitChanges();
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<bool> SaveStatesAsync(StateCreateModel model)
+        {
+            try
+            {
+                await unitOfWork.States.AddAsync(mapper.Map<State>(model));
+                await unitOfWork.CommitChanges();
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
         }
         
     }

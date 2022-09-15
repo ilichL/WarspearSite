@@ -9,8 +9,9 @@ namespace WarspearSite.Core.Interfaces
 {
     public interface IHeroService
     {
-        Task CreateHero(HeroCreateModel model);
+        Task<bool> CreateHeroAsync(HeroCreateModel model);
         Task<HeroCreateModel> GetHeroesByIdAsync(Guid id);
-        Task<HeroModel> GetHeroByNameWithSkillsAndStates(String name);
+        Task<HeroModel> GetHeroByNameWithSkillsAndStatesASync(String name);
+        Task<bool> RemoveHeroWithStatesAsync(HeroModel model);
     }
 }

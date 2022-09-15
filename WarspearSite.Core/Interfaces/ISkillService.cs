@@ -11,9 +11,9 @@ namespace WarspearSite.Core.Interfaces
 {
     public interface ISkillService
     {
-        Task CreateSkill(SkillCreateModel model);
+        Task<bool> CreateSkill(SkillCreateModel model);
         Task<SkillModel> GetSkillBySkillNameAsync(String name);
         Task<SkillCreateModel> GetSkillByIdAsync(Guid id);
-        Task SaveSkillsAsync(List<SkillCreateModel> skills);
+        Task<bool> SaveSkillsAsync(List<SkillCreateModel> skills);
     }
 }

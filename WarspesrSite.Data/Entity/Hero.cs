@@ -10,12 +10,13 @@ namespace WarspesrSite.Data.Entity
     {
         public string Name { get; set; }
         public int Level { get; set; }
+        public string Server { get; set; }
         public decimal Bonus { get; set; }
         public string Class { get; set; }
         public string Fraction { get; set; }
         public Guid UserId { get; set; }
         public virtual User? User { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
-        public virtual ICollection<State> States { get; set; } 
+        public virtual State States { get; set; } 
     }
 }
